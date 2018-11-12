@@ -10,10 +10,10 @@ GAME MECHANICS:
 - And so on...
 
 TODO:
-[] Refactor into individual modules
-[] Create a text-based menu / display
-[] Some stats
-[] Create Unittests
-[] Create installer
+- [] Refactor into individual modules
+- [] Create a text-based menu / display
+- [] Some stats
+- [] Create Unittests
+- [] Create installer
 ...
-[] Play against another human.
+- [] Play against another human.
