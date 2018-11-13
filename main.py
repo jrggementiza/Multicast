@@ -1,5 +1,5 @@
-import random
-
+import random, time
+from display import generate_grid
 
 # TODO: export to own module
 def magic_draw():
@@ -7,7 +7,7 @@ def magic_draw():
 
 
 def magic_stronger():
-    return 'both magic cancelled each other out!'
+    return 'you overwhelmed your opponent!'
 
 
 def magic_weaker():
@@ -86,31 +86,38 @@ def result_phase(player_move, opponent_move, player_health, opponent_health):
 
 # TODO: error handling if outside the moveset
 def action_phase():
-    player_move = input('invoke the spell you want to unlease to your feable foe. : ').lower()
+    player_move = input().lower()
     opponent_move = random.choice(MOVE_SET)
     return player_move, opponent_move
 
 
-# TODO: add dedicated prompt function and section
 def play_game():
-    # Build Stage, welcome menu, stats
     player_health, opponent_health = 5, 5
     no_winner = True
     while no_winner is True:
+        stats = f'Player Health: {player_health} | Computer Health: {opponent_health}'
+        generate_grid(f'invoke the spell you want to unlease to your feable foe.', stats)
         player_move, opponent_move = action_phase()
-        print(f'you used {player_move} while your opponent used {opponent_move}')
+
+        message = f'you used [{player_move}] while your opponent used [{opponent_move}]'
+        generate_grid(message, stats)
+        time.sleep(2)
+
         message, player_health, opponent_health = result_phase(player_move, opponent_move, player_health, opponent_health)
-        print(message)
-        print(f'player hp: {player_health} | opponent hp: {opponent_health}')
+        generate_grid(message, stats)
         no_winner = check_winner(player_health, opponent_health)
+        time.sleep(1)
 
 
 def run_application():
+    # return player's information as a dict
     application_engine = True
     while application_engine is True:
-        play_game()
+        # Build Stage, welcome menu, stats
+        play_game() # load player's information
+        # save player's information
         application_engine = application_continue()
-
+        
 
 if __name__ == "__main__":
     run_application()
